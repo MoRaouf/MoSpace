@@ -84,11 +84,11 @@ search_exclude: true
 
             <!-- Posts -->
               <section class="posts"> 
-                {% if post.featured == true %}
-                  {% for post in site.posts %}
-                    {% include entry_square.html %}
-                  {% endfor %}
-                {% endif %}
+                {% for post in site.posts %}
+                  {% if post.featured == true %}
+                    {% include entry_square.html %}      
+                  {% endif %}
+                {% endfor %}
 
               </section>
              
