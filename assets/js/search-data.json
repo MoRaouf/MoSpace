@@ -100,29 +100,40 @@
   
 
   
-  
-
-  
-
-  
-  
-
-  
-
-  
-  
-
-  
+      ,"page6": {
+          "title": "Projects",
+          "content": "",
+          "url": "https://moraouf.github.io/MoSpace/projects/",
+          "relUrl": "/projects/",
+          "date": ""
+      }
+      
   
 
   
   
 
   
+
+  
   
 
   
-      ,"page14": {
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+      ,"page15": {
           "title": "",
           "content": "Sitemap: {{ “sitemap.xml” | absolute_url }} | .",
           "url": "https://moraouf.github.io/MoSpace/robots.txt",
