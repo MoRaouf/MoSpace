@@ -9,7 +9,7 @@
 title: "MoSpace"
 description: "Personal website of an enthusiast about Machine Learning & Data Science"
 logo: images/logo.png
-background_image:   "/MoSpace/images/bg.jpg"
+background_image:   "/MoSpace/images/a7.jpg"
 copyright: "Created by Oriol Abril. Modified by Mohammed Raouf. Powered by [fastpages](https://fastpages.fast.ai/) and [Basically Basic](https://mmistakes.github.io/jekyll-theme-basically-basic/)"
 github_username: MoRaouf
 # you can comment the below line out if your repo name is not different than your baseurl
@@ -53,7 +53,7 @@ show_image: false
 show_tags: true
 
 # Add your Google Analytics ID here if you have one and want to use it
-google_analytics: UA-165101251-1
+google_analytics: 
 
 exclude:
   - docker-compose.yml
