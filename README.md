@@ -12,7 +12,7 @@ Main Topics:
 * Machine Learning Algorithms
 * Neural Networks
 * Natural Language Processing
-* SQL & NoSQ
+* SQL & NoSQL
 * Data Science in General
 
 
