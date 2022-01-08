@@ -8,6 +8,7 @@ Welcome to my blog where I share projects & knwoledge related to Data Science & 
 At [Mospace](https://moraouf.github.io/MoSpace/), I'm passionate about the applications space of the data, hence the purpose is to share the knowlege I accumulate with the public, so I hope you find it useful.<br>
 
 ![](images/OverTheMoon.png)
+Credit: Bungee the rabbit and Fei Fei. Image: © 2020 Netflix, Inc.
 
 Main Topics:
 * Data Preprocessing
