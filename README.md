@@ -5,7 +5,16 @@
 Hello there,
 
 Welcome to my blog where I share projects & knwoledge related to Data Science & Machine Learning.<br>
-At [Mospace](https://moraouf.github.io/MoSpace/), the purpose is to share the knowlege I accumulate with the public, so I hope you find it useful. 
+At [Mospace](https://moraouf.github.io/MoSpace/), the purpose is to share the knowlege I accumulate with the public, so I hope you find it useful.<br>
+
+Main Topics:
+* Data Preprocessing
+* Machine Learning Algorithms
+* Neural Networks
+* Natural Language Processing
+* SQL & NoSQ
+* Data Science in General
+
 
 Checkout the blog at:<br>
 [Mospace](https://moraouf.github.io/MoSpace/)
