@@ -20,8 +20,6 @@ At [Mospace](https://moraouf.github.io/MoSpace/), I'm passionate about the appli
 
 Checkout the blog at:<br>
 [Mospace](https://moraouf.github.io/MoSpace/)
-
 <br>
-
 <img src="images/OverTheMoon.png" width="700" height="400">
 Credit: Bungee the rabbit and Fei Fei. Image: © 2020 Netflix, Inc.
