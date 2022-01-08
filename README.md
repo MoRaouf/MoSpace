@@ -9,8 +9,8 @@ At [Mospace](https://moraouf.github.io/MoSpace/), I'm passionate about the appli
 
 ![](images/OverTheMoon.png)
 Credit: Bungee the rabbit and Fei Fei. Image: © 2020 Netflix, Inc.
-
-Main Topics:
+<br><br>
+**Main Topics:**
 * Data Preprocessing
 * Machine Learning Algorithms
 * Neural Networks
