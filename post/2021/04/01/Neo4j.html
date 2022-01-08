@@ -275,7 +275,7 @@
 <a class="anchor" href="#-graph-structure-" aria-hidden="true"><span class="octicon octicon-link"></span></a><span style="background:orange"> Graph Structure </span>
 </h3>
 
-<p><img src="attachment:Neo4j%20Graph%20Structure.png" alt="Neo4j%20Graph%20Structure.png"></p>
+<p><img src="/MoSpace/images/posts/Neo4j%20Graph%20Structure.png" alt=""></p>
 
 <hr>
 <hr>
@@ -295,7 +295,7 @@
 
 <p>return count(m.title)</p>
 
-<p><img src="attachment:1.PNG" alt="1.PNG"></p>
+<p><img src="/MoSpace/images/posts/1.PNG" alt=""></p>
 
 <hr>
 <hr>
@@ -314,8 +314,9 @@ number of male actors in the dataset:</strong></p>
 
 <p>with count(b) as male, female</p>
 
-<p>return male, female
-<img src="attachment:2.PNG" alt="2.PNG"></p>
+<p>return male, female</p>
+
+<p><img src="/MoSpace/images/posts/2.PNG" alt=""></p>
 
 <hr>
 <hr>
@@ -323,8 +324,9 @@ number of male actors in the dataset:</strong></p>
 
 <p>match (m:Movie)</p>
 
-<p>return m.year order by m.year limit 1
-<img src="attachment:3.PNG" alt="3.PNG"></p>
+<p>return m.year order by m.year limit 1</p>
+
+<p><img src="/MoSpace/images/posts/3.PNG" alt=""></p>
 
 <hr>
 <hr>
@@ -337,8 +339,9 @@ than 5 directors:</strong></p>
 
 <p>where dircount &gt; 5</p>
 
-<p>return m.title, dircount
-<img src="attachment:4.PNG" alt="4.PNG"></p>
+<p>return m.title, dircount</p>
+
+<p><img src="/MoSpace/images/posts/4.PNG" alt=""></p>
 
 <hr>
 <hr>
@@ -350,8 +353,9 @@ originals; use the time1 column for movie lengths:</strong></p>
 
 <p>where m.time.minutes &gt;= 15 AND m.time.minutes &lt;= 20</p>
 
-<p>return count(m)
-<img src="attachment:5.PNG" alt="5.PNG"></p>
+<p>return count(m)</p>
+
+<p><img src="/MoSpace/images/posts/5.PNG" alt=""></p>
 
 <hr>
 <hr>
@@ -362,8 +366,9 @@ originals; use the time1 column for movie lengths:</strong></p>
 
 <p>where a.name contains “Bill” and a.name contains “Nighy” and b.name contains “Ewan” and b.name contains “McGregor”</p>
 
-<p>return m.title
-<img src="attachment:6.PNG" alt="6.PNG"></p>
+<p>return m.title</p>
+
+<p><img src="/MoSpace/images/posts/6.PNG" alt=""></p>
 
 <hr>
 <hr>
@@ -383,8 +388,9 @@ originals; use the time1 column for movie lengths:</strong></p>
 
 <p>where males &lt; females</p>
 
-<p>return count(m) as Count_of_Movies
-<img src="attachment:7.PNG" alt="7.PNG"></p>
+<p>return count(m) as Count_of_Movies</p>
+
+<p><img src="/MoSpace/images/posts/7.PNG" alt=""></p>
 
 <hr>
 <hr>
@@ -397,8 +403,9 @@ films, include their names and number of films they’ve co-starred in:</strong>
 
 <p>where moviecount &gt; 10 and a.actorId &lt; b.actorId</p>
 
-<p>return a.name, b.name, moviecount
-<img src="attachment:8.PNG" alt="8.PNG"></p>
+<p>return a.name, b.name, moviecount</p>
+
+<p><img src="/MoSpace/images/posts/8.PNG" alt=""></p>
 
 <hr>
 <hr>
@@ -436,8 +443,9 @@ below:
 
 <p>with count(m) as <code class="highlighter-rouge">2010-2019</code>, <code class="highlighter-rouge">1970-1979</code>,<code class="highlighter-rouge">1980-1989</code>,<code class="highlighter-rouge">1990-1999</code>,<code class="highlighter-rouge">2000-2009</code></p>
 
-<p>return <code class="highlighter-rouge">1970-1979</code>, <code class="highlighter-rouge">1980-1989</code>,<code class="highlighter-rouge">1990-1999</code>,<code class="highlighter-rouge">2000-2009</code>,<code class="highlighter-rouge">2010-2019</code>
-<img src="attachment:9.PNG" alt="9.PNG"></p>
+<p>return <code class="highlighter-rouge">1970-1979</code>, <code class="highlighter-rouge">1980-1989</code>,<code class="highlighter-rouge">1990-1999</code>,<code class="highlighter-rouge">2000-2009</code>,<code class="highlighter-rouge">2010-2019</code></p>
+
+<p><img src="/MoSpace/images/posts/9.PNG" alt=""></p>
 
 <hr>
 <hr>
@@ -447,8 +455,9 @@ below:
 
 <p>where  a.name contains “Tom” and a.name contains “Hanks” and m.year = 1993</p>
 
-<p>return count(m)
-<img src="attachment:10.PNG" alt="10.PNG"></p>
+<p>return count(m)</p>
+
+<p><img src="/MoSpace/images/posts/10.PNG" alt=""></p>
 
 <hr>
 <hr>
@@ -459,8 +468,9 @@ scoring genres which have received 15,000 or more votes **</p>
 
 <p>where m.votes &gt; 15000</p>
 
-<p>return r.genre as Genre, avg(m.rank) as Average_Rank order by Average_Rank desc limit 4
-<img src="attachment:11.PNG" alt="11.PNG"></p>
+<p>return r.genre as Genre, avg(m.rank) as Average_Rank order by Average_Rank desc limit 4</p>
+
+<p><img src="/MoSpace/images/posts/11.PNG" alt=""></p>
 
 <hr>
 <hr>
@@ -472,8 +482,9 @@ as an image or text description in form (a)-[ ]-&gt;(b)-[ ]-&gt; (c)…</strong>
 
 <p>where a.name contains “Leonard” and a.name contains “Nimoy” and  m.title = “Back to the Future”</p>
 
-<p>return p
-<img src="attachment:12.PNG" alt="12.PNG"></p>
+<p>return p</p>
+
+<p><img src="/MoSpace/images/posts/12.PNG" alt=""></p>
 
 <hr>
 <hr>
@@ -486,8 +497,9 @@ genres  (show names, and number of genres):</strong></p>
 
 <p>where genrecount&gt;=9</p>
 
-<p>return a.name, genrecount
-<img src="attachment:13.PNG" alt="13.PNG"></p>
+<p>return a.name, genrecount</p>
+
+<p><img src="/MoSpace/images/posts/13.PNG" alt=""></p>
 
 <hr>
 <hr>
@@ -498,8 +510,9 @@ movie?</strong></p>
 
 <p>where a.sex = “Female” and a.name = w.name = d.name</p>
 
-<p>return count(distinct m)
-<img src="attachment:14.PNG" alt="14.PNG"></p>
+<p>return count(distinct m)</p>
+
+<p><img src="/MoSpace/images/posts/14.PNG" alt=""></p>
 
 <hr>
 <hr>
@@ -518,8 +531,9 @@ appear in the movie) :</strong></p>
 
 <p>with  distinct w.name as writers, d.name as directors, m.title as movies</p>
 
-<p>return count(movies)
-<img src="attachment:15.PNG" alt="15.PNG"></p>
+<p>return count(movies)</p>
+
+<p><img src="/MoSpace/images/posts/15.PNG" alt=""></p>
 
   </div><!-- from https://github.com/utterance/utterances -->
 <script src="https://utteranc.es/client.js"
