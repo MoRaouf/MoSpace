@@ -14,11 +14,11 @@ At [Mospace](https://moraouf.github.io/MoSpace/), I'm passionate about the appli
 * Neural Networks
 * Natural Language Processing
 * SQL & NoSQL
-* Data Science in General<br>
+* Data Science in General
 
-
+<br><br>
 Checkout the blog at:<br>
-[Mospace](https://moraouf.github.io/MoSpace/)<br>
+[**Mospace**](https://moraouf.github.io/MoSpace/)<br>
 <br><br>
 <img src="images/OverTheMoon.png" width="700" height="400"><br>
 Credit: Bungee the rabbit and Fei Fei. Image: © 2020 Netflix, Inc.
