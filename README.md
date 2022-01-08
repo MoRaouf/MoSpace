@@ -14,7 +14,8 @@ At [Mospace](https://moraouf.github.io/MoSpace/), I'm passionate about the appli
 * Neural Networks
 * Natural Language Processing
 * SQL & NoSQL
-* Data Science in General<br>
+* Data Science in General
+
 <br><br>
 Checkout the blog at:<br>
 [**Mospace**](https://moraouf.github.io/MoSpace/)<br>
