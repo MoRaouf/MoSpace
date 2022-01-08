@@ -8,7 +8,7 @@ Hello there,
 Welcome to my blog where I share projects & knwoledge related to Data Science & Machine Learning.<br>
 At [Mospace](https://moraouf.github.io/MoSpace/), I'm passionate about the applications space of the data, hence the purpose is to share the knowlege I accumulate with the public, so I hope you find it useful.<br>
 
-<img src="images/OverTheMoon.png" width="1000" height="600">
+<img src="images/OverTheMoon.png" width="500" height="300">
 Credit: Bungee the rabbit and Fei Fei. Image: © 2020 Netflix, Inc.
 <br><br>
 **Main Topics:**
