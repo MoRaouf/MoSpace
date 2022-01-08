@@ -15,11 +15,9 @@ At [Mospace](https://moraouf.github.io/MoSpace/), I'm passionate about the appli
 * Natural Language Processing
 * SQL & NoSQL
 * Data Science in General
-
 <br><br>
 
-**Checkout the blog at:**
-[**Mospace**](https://moraouf.github.io/MoSpace/)
+>**Checkout the blog at:**[**Mospace**](https://moraouf.github.io/MoSpace/)
 <br>
 <br>
 <img src="images/OverTheMoon.png" width="700" height="400"><br>
