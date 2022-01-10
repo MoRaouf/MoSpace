@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="twitter:card" content="summary" /><title>Introduction to MongoDB | MoSpace</title>
+<meta name="description" content="Document-oriented NoSQL Database Turorial & Code Snippets">
+
+<!-- SEO and meta information for twitter/whatsupp cards --><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Introduction to MongoDB | MoSpace</title>
+<meta name="generator" content="Jekyll v4.0.1" />
+<meta property="og:title" content="Introduction to MongoDB" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Document-oriented NoSQL Database Turorial &amp; Code Snippets" />
+<meta property="og:description" content="Document-oriented NoSQL Database Turorial &amp; Code Snippets" />
+<link rel="canonical" href="https://moraouf.github.io/MoSpace/post/2021/09/08/MongoDB-Tutorial.html" />
+<meta property="og:url" content="https://moraouf.github.io/MoSpace/post/2021/09/08/MongoDB-Tutorial.html" />
+<meta property="og:site_name" content="MoSpace" />
+<meta property="og:image" content="https://moraouf.github.io/MoSpace/images/posts/blog.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-08T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Document-oriented NoSQL Database Turorial &amp; Code Snippets","headline":"Introduction to MongoDB","dateModified":"2021-09-08T00:00:00-05:00","datePublished":"2021-09-08T00:00:00-05:00","@type":"BlogPosting","image":"https://moraouf.github.io/MoSpace/images/posts/blog.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://moraouf.github.io/MoSpace/post/2021/09/08/MongoDB-Tutorial.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://moraouf.github.io/MoSpace/images/logo.png"}},"url":"https://moraouf.github.io/MoSpace/post/2021/09/08/MongoDB-Tutorial.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<!-- Feed --><link type="application/atom+xml" rel="alternate" href="https://moraouf.github.io/MoSpace/atom.xml" title="MoSpace" /><!-- CSS --><link rel="shortcut icon" type="image/png" href="/MoSpace/images/logo.png">
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://moraouf.github.io/MoSpace/assets/css/main.css" />
+<noscript><link rel="stylesheet" href="https://moraouf.github.io/MoSpace/assets/css/noscript.css" /></noscript>
+<link rel="stylesheet" href="https://moraouf.github.io/MoSpace/assets/stylesheets/main.css" />
+<link rel="stylesheet" href="https://moraouf.github.io/MoSpace/assets/css/academicons.min.css"/>
+
+<!-- Analytics --><!-- Math -->
+
+
+  </head>
+  <body class="is-loading">
+
+    <!-- Wrapper -->
+      <div id="wrapper" class="fade-in">
+
+        <!-- Header -->
+        <header id="header">
+          <a href="https://moraouf.github.io/MoSpace/" class="logo">MoSpace</a>
+        </header>
+
+        <!-- Nav -->
+          <nav id="nav">
+
+            <ul class="links">
+  <li class=""><a href="https://moraouf.github.io/MoSpace/">Home</a></li>
+  <li class=""><a href="https://moraouf.github.io/MoSpace/blog/">Blog</a></li>
+  <li class=""><a href="https://moraouf.github.io/MoSpace/projects/">Projects</a></li>
+  <li class=""><a href="https://moraouf.github.io/MoSpace/categories/">Categories</a></li>
+  <!-- <li class=""><a href="https://moraouf.github.io/MoSpace/tags/">Tags</a></li> -->
+  <li class=""><a href="https://moraouf.github.io/MoSpace/about/">About me</a></li>
+  <li class=""><a href="https://drive.google.com/file/d/1dEfyETehozDSqN2IUGydNP1nbmDO_fbn/view?usp=sharing">My CV</a></li>
+</ul>
+
+<ul class="icons">
+  <li class=""><a href="https://moraouf.github.io/MoSpace/search" class="icon fa-search"><span class="label">Search</span></a></li>
+  <li><a href="https://github.com/MoRaouf" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+  <li><a href="https://twitter.com/_MRaouf" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>
+  <li><a href="https://linkedin.com/in/" class="icon fa-linkedin" rel="nofollow"><span class="label">LinkedIn</span></a></li>
+</ul>
+
+
+          </nav>
+
+        <!-- Main -->
+        <div id="main">
+
+          <!-- Post -->
+          <section class="post">
+            
+            <p><article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Introduction to MongoDB</h1><p class="page-description">Document-oriented NoSQL Database Turorial & Code Snippets</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-09-08T00:00:00-05:00" itemprop="datePublished">
+        Sep 8, 2021
+      </time>• 
+
+
+
+<span class="read-time" title="Estimated read time">
+
+  14 min read
+
+</span>
+
+    </p>
+
+    
+      <p class="category-tags"><i class="fa fa-folder category-tags-icon"></i></i>
+      
+        <a class="category-tags-link" href="/MoSpace/categories/#post">post</a>
+        
+      
+      </p>
+    
+
+    
+      <p class="category-tags"><i class="fa fa-tags category-tags-icon"></i></i>
+      
+        <a class="category-tags-link" href="/MoSpace/tags/#MongoDB">MongoDB</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/MoSpace/tags/#NoSQL">NoSQL</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+</ul><ul>
+  <li>Collection - an organized store of documents in MongoDB usually with common fields between documents. There can be many collections per database and many documents per collection. (Equal to Table in RDBMS)</li>
+  <li>
+<em>Document</em> - a way to organize and store data as a set of field-value pairs (in JSON format).
+    <ul>
+      <li>
+<em>Field</em> - a unique identifier for a datapoint.</li>
+      <li>
+<em>Value</em> - data related to a given identifier.</li>
+    </ul>
+  </li>
+  <li>
+<em>Replica Set</em> - a few connected machines that store the same data to ensure that if something happens to one of the machines the data will remain intact. Comes from the word replicate - to copy something.</li>
+  <li>
+<em>Instance</em> - a single machine locally or in the cloud, running a certain software, in our case it is the MongoDB database.</li>
+  <li>
+<em>Cluster</em> - group of servers that store your data.</li>
+  <li>
+    <p>Namespace - The concatenation of the database name and collection name is called a namespace. (e.g., samples.cars)</p>
+  </li>
+  <li>MongoDB stores data in BSON format both internally, and over the network, but that doesn’t mean you can’t think of MongoDB as a JSON database. Anything you can represent in JSON can be natively stored in MongoDB, and retrieved just as easily in JSON.</li>
+</ul>
+
+<p><img src="MongoDB%20Tutorial%207ad9850475cf4b79b84356f38a6c5ea2/RDBMS_vs_MongoDB.png" alt="MongoDB%20Tutorial%207ad9850475cf4b79b84356f38a6c5ea2/RDBMS_vs_MongoDB.png"></p>
+
+<p><strong>— How to connect to MongoDB shell “For Atlas”:</strong></p>
+
+<p>Go to Atlas, connect to Sandbox (or any created cluster) &amp; choose connect through shell. Then copy the command &amp; paste it in Command Prompt &amp; enter password. Then work through the command prompt &amp; type any MongoDB command.</p>
+
+<ul>
+  <li>General format in M001 course: <code class="highlighter-rouge">mongo "mongodb+srv://&lt;username&gt;:&lt;password&gt;@&lt;cluster&gt;.mongodb.net/&lt;collection&gt;"</code>
+My Command : 
+<code class="highlighter-rouge">mongo "mongodb+srv://m001-student:m001-mongodb-basics@sandbox.q8r0r.mongodb.net"</code>
+</li>
+  <li>
+    <p>Connect to MongoDB Compass : <code class="highlighter-rouge">mongodb+srv://m001-student:m001-mongodb-basics@sandbox.q8r0r.mongodb.net</code></p>
+  </li>
+  <li>
+<strong>Importing &amp; Exporting:</strong>  Better to import using compass as its very easy.</li>
+</ul>
+
+<p><img src="MongoDB%20Tutorial%207ad9850475cf4b79b84356f38a6c5ea2/MongoDB_Atlas_Import.png" alt="MongoDB%20Tutorial%207ad9850475cf4b79b84356f38a6c5ea2/MongoDB_Atlas_Import.png"></p>
+
+<p><img src="MongoDB%20Tutorial%207ad9850475cf4b79b84356f38a6c5ea2/MongoDB_Atlas_Import_2.png" alt="MongoDB%20Tutorial%207ad9850475cf4b79b84356f38a6c5ea2/MongoDB_Atlas_Import_2.png"></p>
+
+<ul>
+  <li>mongoimport : Import JSON file
+    <ul>
+      <li><code class="highlighter-rouge">mongoimport --uri mongodb+srv://m001-student:&lt;PASSWORD&gt;@sandbox.q8r0r.mongodb.net/&lt;DATABASE&gt; --collection &lt;COLLECTION&gt; --type &lt;FILETYPE&gt; --file &lt;FILENAME&gt;</code></li>
+      <li>Import a local file to Atlas : 
+  <code class="highlighter-rouge">mongoimport --uri mongodb+srv://m001-student:m001-mongodb-basics@sandbox.q8r0r.mongodb.net/hw --collection hwup --type jsonArray --file C:/Users/MR/Desktop/labData.json</code>
+</li>
+    </ul>
+  </li>
+  <li>mongoexport : Export JSON file
+    <ul>
+      <li><code class="highlighter-rouge">mongoexport --uri mongodb+srv://m001-student:&lt;PASSWORD&gt;@sandbox.q8r0r.mongodb.net/&lt;DATABASE&gt; --collection &lt;COLLECTION&gt; --type &lt;FILETYPE&gt; --out &lt;FILENAME&gt;</code></li>
+    </ul>
+  </li>
+  <li>mongorestore : Import BSON file
+    <ul>
+      <li><code class="highlighter-rouge">mongorestore --uri "mongodb+srv://&lt;your username&gt;:&lt;your password&gt;@&lt;your cluster&gt;.mongodb.net/sample_supplies"  --drop dump</code></li>
+    </ul>
+  </li>
+  <li>mongodump : Export BSON file
+    <ul>
+      <li><code class="highlighter-rouge">mongodump --uri "mongodb+srv://&lt;your username&gt;:&lt;your password&gt;@&lt;your cluster&gt;.mongodb.net/sample_supplies"</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="https://www.freecodecamp.org/news/learn-mongodb-a4ce205e7739/">How to get started with MongoDB in 10 minutes</a></p>
+
+<ul>
+  <li>
+    <p><strong>How to run MongoDB after installation from Command Prompt (Not Atlas)</strong></p>
+
+    <p>1- Download &amp; install the msi (executable file), or download the zip &amp; extract it.</p>
+
+    <p>2- Make a folder called (data) in C:/ , &amp; make inside it another folder called (db).</p>
+
+    <p>3- Run in a command prompt the following command &amp; keep it open : mongod</p>
+
+    <p>4- Open another command prompt and run the command : <code class="highlighter-rouge">mongo</code> or <code class="highlighter-rouge">mongo "mongodb+srv://m001-student:m001-mongodb-basics@sandbox.q8r0r.mongodb.net"</code></p>
+
+    <p>5- Then do whatever you want.</p>
+  </li>
+  <li>
+    <p><strong>How to import JSON file to MongoDB Database in Command Prompt</strong></p>
+
+    <ul>
+      <li>first check mongoimport.exe file in your bin folder(C:\Program Files\MongoDB\Server\4.4\bin) if it is not then download mongodb database tools(<a href="https://www.mongodb.com/try/download/database-tools">https://www.mongodb.com/try/download/database-tools</a>)</li>
+      <li>copy extracted(unzip) files(inside unzipped bin) to bin folder(C:\Program Files\MongoDB\Server\4.4\bin), or in the MongoDB unzipped folder in another drive (if not installed through the exe file) (which is in my case E:\MongoDB\bin)</li>
+      <li>In terminal, use the following command to import the books.json to the MongoDB database server:
+  <code class="highlighter-rouge">mongoimport c:\data\books.json -d bookdb -c books --drop</code>
+</li>
+    </ul>
+
+    <p>(The location of the file to be imported can be anywhere, &amp; while importing, the location to be specified. Another example (E:/ABC/testdata.json))</p>
+
+    <p>In this command:</p>
+
+    <ul>
+      <li>First, start with the <code class="highlighter-rouge">mongoimport</code> command.</li>
+      <li>Next, specify the path to the books.json data file. In this example, it is <code class="highlighter-rouge">c:\data\books.json</code>.</li>
+      <li>Third, use <code class="highlighter-rouge">-d bookdb</code> to specify the target database, which is bookdb in this example.</li>
+      <li>Fourth, use <code class="highlighter-rouge">-c books</code> to specify the target collection, which is books in this case.</li>
+      <li>Finally, use the <code class="highlighter-rouge">--drop</code> flag to drop the collection if it exists before importing the data</li>
+    </ul>
+
+    <p>The mongoimport command to be used alone &amp; separately before <code class="highlighter-rouge">mongod</code> &amp; <code class="highlighter-rouge">mongo</code> commands. After importing, we can access MongoDB databse server &amp; work on the imported data.</p>
+  </li>
+</ul>
+
+<p>“I will use BGDB as a database &amp; Bigdata as a collection name in the following commands”:</p>
+
+<ul>
+  <li>
+<code class="highlighter-rouge">show dbs</code> : to show the list of databases.</li>
+  <li>
+<code class="highlighter-rouge">use BGDB</code> : use the BGDP database.</li>
+  <li>
+<code class="highlighter-rouge">show collections</code> : list the avialable collections</li>
+  <li>
+<code class="highlighter-rouge">db.Bigdata.find({"state": "NY"})</code> : find all states that are named “NY”.</li>
+  <li>
+<code class="highlighter-rouge">it</code> : iterates to show the next group of documents.
+    <ul>
+      <li>
+<strong>it :</strong> iterates through a <strong>Cursor</strong>
+</li>
+      <li>
+<strong>Cursor</strong> :  A <strong>Pointer</strong> to a result set of a query</li>
+      <li>
+<strong>Pointer</strong> : A direct address of th memory location</li>
+    </ul>
+  </li>
+  <li>
+<code class="highlighter-rouge">db.Bigdata.find({"state": "NY"}).count()</code> : find how many documents match the query</li>
+  <li>
+    <p><code class="highlighter-rouge">db.Bigdata.find({"state": "NY"}).pretty()</code> : return the result in a formatted way for easy reading</p>
+  </li>
+  <li><em>When inserting a document via the Data Explorer in Atlas, the _id value is already generated as an <strong>ObjectID</strong> type, while the rest of the fields are not.</em></li>
+  <li>
+    <p>MongoDB generates a value, so that there is one just in case. You can definitely change the default value to a different value or data type, as long as they are unique to this document and not an array.</p>
+  </li>
+  <li>
+<strong>Creating a Collection:</strong>  There are two ways:
+    <ul>
+      <li>One way is to insert data into the collection:
+  <code class="highlighter-rouge">db.Bigdata.insert({"name": "john", "age" : 22, "location": "colombo"})</code>
+  This is going to create your collection Bigdata even if the collection does not exist. Then it will insert a document with name and age.</li>
+      <li>Second Way:
+        <ul>
+          <li>Creating a Non-Capped Collection:
+  <code class="highlighter-rouge">db.createCollection("myCollection")</code>
+</li>
+          <li>Creating a Capped Collection:
+  <code class="highlighter-rouge">db.createCollection("mySecondCollection", {capped : true, size : 2, max : 2})</code>
+  A “capped collection” has a maximum document count that prevents overflowing documents. In this example, I have enabled capping, by setting its value to <code class="highlighter-rouge">true</code>. The <code class="highlighter-rouge">size : 2</code> means a limit of two megabytes, and <code class="highlighter-rouge">max: 2</code> sets the maximum number of documents to two.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+<strong>Insertion:</strong>
+    <ol>
+      <li>
+<code class="highlighter-rouge">insertOne()</code> is used to insert a single document only.
+  <code class="highlighter-rouge">db.myCollection.insertOne({"name": "navindu", "age": 22})</code>
+</li>
+      <li>
+<code class="highlighter-rouge">insertMany()</code> is used to insert more than one document.</li>
+      <li>
+<code class="highlighter-rouge">insert()</code> is used to insert documents as many as you want.
+        <ul>
+          <li>
+<strong>If the insertion is</strong> <strong>ordered</strong>, if it encounters duplicate keys error (documents with the same <code class="highlighter-rouge">_id</code> key) then the insertion will stop. Even if the rest of the documents have unique IDs, they will not be inserted.
+  <code class="highlighter-rouge">db.inspections.insert([{ "_id": 1, "test": 1 },{ "_id": 1, "test": 2 },{ "_id": 3, "test": 3 }])</code> : Here the insertion is ordered, so <code class="highlighter-rouge">{ "_id": 1, "test": 1 }</code> will be inserted, then a duplicate key error will rise when inserting        <code class="highlighter-rouge">{ "_id": 1, "test": 2 }</code> &amp; the insertion operation will stop , so <code class="highlighter-rouge">{ "_id": 3, "test": 3 }</code> will not be inserted even if it has unique ID.</li>
+          <li>
+<strong>If the insertion is</strong> <strong>not ordered</strong>, every document that has unique ID (<code class="highlighter-rouge">_id</code> key) will be inserted ( for documents that have duplicate keys, only one will be inserted). This can be achieved using <code class="highlighter-rouge">{ "ordered": false }</code>
+</li>
+        </ul>
+
+        <p><code class="highlighter-rouge">db.inspections.insert([{ "_id": 1, "test": 1 },{ "_id": 1, "test": 2 },{ "_id": 3, "test": 3 }],{ "ordered": false })</code> : Here the insertion is unordered, so <code class="highlighter-rouge">{ "_id": 3, "test": 3 }</code> will be inserted, &amp; only one document with <code class="highlighter-rouge">"_id":1</code> will be inserted, resulting in 2 documents being inserted.</p>
+      </li>
+    </ol>
+
+    <ul>
+      <li>If the <code class="highlighter-rouge">_id</code> is not specified in the documents being inserted, all documents will be inserted because a unique <code class="highlighter-rouge">_id</code> with the value <code class="highlighter-rouge">ObjectId()</code> will be created for each one.</li>
+    </ul>
+  </li>
+  <li>
+<strong>Update:</strong>
+    <ul>
+      <li>
+<code class="highlighter-rouge">**updateOne</code> :** Update a <strong>single</strong> document in the zips collection where the zip field is equal to “12534”, by setting the value of the “pop” field to 17630. 
+  <code class="highlighter-rouge">db.zips.**updateOne**({ "zip": "12534" }, { "$set": { "pop": 17630 } })</code>
+</li>
+      <li>
+<code class="highlighter-rouge">**updateMany**</code> : Update <strong>all</strong> documents in the zips collection where the city field is equal to “HUDSON”, by adding 10 to the current value of the “pop” field.
+  <code class="highlighter-rouge">db.zips.**updateMany**({ "city": "HUDSON" }, { "$inc": { "pop": 10 } })</code>
+</li>
+      <li>
+<code class="highlighter-rouge">**update()**</code> : <strong><em>below command will update all documents with the specififed fields. Only when the “_id” is specified, the intended document will be updated.</em></strong> <br>
+  <code class="highlighter-rouge">db.hwuPeople.update({last_name : "burger"}, {$set: {title : "prof", role : "prof"}})</code>
+</li>
+      <li>
+<strong>Adding an elemnt to an array</strong>:
+        <ul>
+          <li>1- Update one document in the grades collection where the student_id is 250, and the class_id field is 339 , by adding a document element to the “scores” array. “scores” is an array of documents [ { }, { }, { } …. ]
+  <code class="highlighter-rouge">db.grades.updateOne({ "student_id": 250, "class_id": 339 }, { "$push": { "scores": { "type": "extra credit", "score": 100 }}})</code>
+</li>
+          <li>2- Add a string element to the the “role” array. “role” is an array of strings [ “a”, “b”, “c” …. ]
+  <code class="highlighter-rouge">db.hwuPeople.update({first_name: "manni"}, {$push: {role: "lab assistant"}})</code>
+</li>
+        </ul>
+      </li>
+      <li><strong>If we try to update a field that doesnt exist, MongoDB will create it &amp; update it with the given value.</strong></li>
+      <li>
+<strong>If you try to update a document that is not there, nothing happens.</strong>  However, mongoDB supports “<strong>upserts</strong>” (update or insert if there is no document found) : 
+  <code class="highlighter-rouge">db.hwuPeople.update({first_name: "andy", role: "ra"}, {age: 47}, **{upsert:true}**)</code>
+  This adds a new document, but it only contains “age” field, which is not the intended action !!  The right query is : 
+  <code class="highlighter-rouge">db.hwuPeople.update({first_name:"andy",last_name:"proudlove",role:"ra"}, {first_name:"andy",last_name:"proudlove",role:"ra",age:47}, {upsert:true})</code>
+  (Google “upsert” for more clarification)</li>
+      <li>
+<strong>With a flexible schema you can add information to one document but not to others.</strong> We can add additional fields to specific existing documents through update() : 
+  <code class="highlighter-rouge">db.hwuPeople.update({last_name: "mcleod"}, {$set: {email:"kcm1@hw.ac.uk"}})</code>
+</li>
+    </ul>
+  </li>
+  <li>
+<strong>Deletion:</strong>
+    <ul>
+      <li>
+<code class="highlighter-rouge">**deleteOne**</code> : Delete <strong>one</strong> document that has test field equal to 3 : <code class="highlighter-rouge">db.inspections.**deleteOne**({ "test": 3 })</code>
+</li>
+      <li>
+<code class="highlighter-rouge">**deleteMany**</code> : Delete <strong>all</strong> the documents that have test field equal to 1 : <code class="highlighter-rouge">db.inspections.**deleteMany**({ "test": 1 })</code>
+</li>
+      <li>Remove a property (key) from a single document:
+  <code class="highlighter-rouge">db.myCollection.update({name: "navindu"}, {**$unset**: age});</code>
+</li>
+      <li>
+<code class="highlighter-rouge">**remove()**</code> :
+        <ul>
+          <li>Remove all documents that match the specified criteria of age = 47
+  <code class="highlighter-rouge">db.hwuPeople.remove({age: 47})</code>
+</li>
+          <li>Remove all documents in a collection : 
+  <code class="highlighter-rouge">db.hwuPeople.remove({ })</code>
+</li>
+        </ul>
+      </li>
+      <li>Drop the inspection collection with any indexes created for it : <code class="highlighter-rouge">db.inspection.drop()</code> . Or while importing we can use <code class="highlighter-rouge">--drop</code> to ensure the collection is dropped before insertion to prevent duplicate keys error.</li>
+      <li><strong>When all collections are dropped from a database, the database no longer appears in the list of databases when you run <code class="highlighter-rouge">show dbs</code>.</strong></li>
+    </ul>
+  </li>
+  <li>
+<code class="highlighter-rouge">**distinct()**</code> : find the unique values.
+<code class="highlighter-rouge">db.hwuPeople.distinct("title")</code>
+</li>
+  <li>
+<code class="highlighter-rouge">**{$exists: false}**</code> : to find a document which does not have a specific field.
+<code class="highlighter-rouge">db.hwuPeople.find({age : {$exists: false}})</code> 
+<code class="highlighter-rouge">db.hwup.find({"first_name" : "kareem", "age" : {$exists : false}})</code>
+</li>
+  <li>
+    <p><strong><code class="highlighter-rouge">findOne</code></strong> : to find <em>**</em>only one document 
+<code class="highlighter-rouge">db.listingsAndReviews.**findOne**({ },{ "address": 1, "_id": 0 })</code></p>
+  </li>
+  <li>
+<strong>Comparison Operators</strong>: Let’s say you want only to display people whose age is less than 25. You can use <code class="highlighter-rouge">$lt</code> to filter for this.
+<code class="highlighter-rouge">db.myCollection.find({age : {$gt : 25, $lt : 100}})</code>
+Similarly, <code class="highlighter-rouge">$gt</code> stands for “greater than”, <code class="highlighter-rouge">$lte</code> is “less than or equal to”, <code class="highlighter-rouge">$gte</code> is “greater than or equal to” , <code class="highlighter-rouge">$eq</code> is “equal to” and <code class="highlighter-rouge">$ne</code> is “not equal”. They are used in 2 formats :
+    <ul>
+      <li>Applied on a field value. “It’s used inside curly brackets”. <code class="highlighter-rouge">{age : {$gt : 25}}</code>
+</li>
+      <li>Compare two field values. “It’s using an array of values”. <code class="highlighter-rouge">{ "$eq": [ "$end station id", "$start station id" ] }</code>
+</li>
+    </ul>
+  </li>
+  <li>
+<strong>Counting</strong>:
+    <ul>
+      <li>
+<code class="highlighter-rouge">length()</code> is for the length of documents, while <code class="highlighter-rouge">length</code> is for the length of a list.</li>
+      <li>
+<code class="highlighter-rouge">db.hwuPeople.**count**({age : 35})</code>   OR    <code class="highlighter-rouge">db.hwuPeople.find({age : 35}).**count()**</code>
+</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Sorting &amp; Limiting</strong>: Sorting the result based on a specific field. Use 1 for ascending order, and -1 for descending order. Then limit the result to 10 documents only. In MongoDB, when using <code class="highlighter-rouge">sort()</code> &amp; <code class="highlighter-rouge">limit()</code> together regardless of their order, it assumes we want to sort first them limit.
+<code class="highlighter-rouge">db.hwuPeople.find({age : 35}).**sort({name: 1, age : -1}).limit(10)**</code></p>
+  </li>
+  <li>
+<strong>Logical Operators:</strong>
+    <ul>
+      <li>
+<code class="highlighter-rouge">$and</code>, <code class="highlighter-rouge">$or</code>, <code class="highlighter-rouge">$nor</code> (They include an array of statements): <code class="highlighter-rouge">{&lt;operator&gt; : [ {statement 1}, {statement 2}, ... ] }</code>
+  <strong><code class="highlighter-rouge">db.routes.find({$and:[{$or :[ { "dst_airport": "KZN" }, { "src_airport": "KZN" }]},
+                       {$or :[ { "airplane": "CR2" }, { "airplane": "A81" } ]}
+                     ]}).pretty()</code></strong>
+</li>
+      <li>
+<code class="highlighter-rouge">$not</code> : <code class="highlighter-rouge">{$not : {statement}}</code>
+</li>
+    </ul>
+  </li>
+  <li>
+<strong>Expressive Query Operator “<code class="highlighter-rouge">$expr</code>”:</strong>
+    <ul>
+      <li>Allows the use of aggregation expressions</li>
+      <li>Allows the use of variables, conditional statements (comparing field values)
+        <ul>
+          <li><code class="highlighter-rouge">db.trips.find({ "$expr": { "$eq": [ "$end station id", "$start station id"] } }).</code></li>
+          <li>
+<code class="highlighter-rouge">db.trips.find({ "$expr": { "$and": [ { "$gt": [ "$tripduration", 1200 ]},
+                       { "$eq": [ "$end station id", "$start station id" ]}
+                     ]}}).count()</code> Look for trip durations that are greater than 1200 AND the “end station id” = “start station id”</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+<strong>The usage of the dollar sign “$”:</strong>
+    <ul>
+      <li>Denotes the use of an operator : like in <code class="highlighter-rouge">db.myCollection.find({age : {**$**gt : 25, **$**lt : 100}})</code>
+</li>
+      <li>Adresses the field value (Points at the value) : <code class="highlighter-rouge">db.trips.find({ "$expr": { "$eq": [ "**$**end station id", "**$**start station id"] } }).count()</code> Here we are comparing the equality of the “end station id” &amp; “start station id” VALUES.</li>
+    </ul>
+  </li>
+  <li>
+<strong>Array Operators:</strong>
+    <ul>
+      <li>
+<code class="highlighter-rouge">{ &lt;array field&gt; : { **$size** : &lt;number&gt;} }</code> : return all documents where the specified array is exactly the given length.
+  <code class="highlighter-rouge">{ "amenities": { $size : 20 } }</code>
+</li>
+      <li>
+<code class="highlighter-rouge">{ &lt;array field&gt; : { **$all** : &lt;array of elements&gt;} }</code> : return all documents where the specified array field contains all the given elements regardless of their order in the array.
+  <code class="highlighter-rouge">{ "amenities": { $all : [""wifi, "shampoo", "parking"] } }</code>
+</li>
+      <li>Both <code class="highlighter-rouge">**$size**</code> &amp; <code class="highlighter-rouge">**$all**</code> combined in a query : 
+  <code class="highlighter-rouge">db.listingsAndReviews.find({ "amenities": { $size : 20, $all : [ "Internet", "Wifi",  "Kitchen" ] } } )</code>
+</li>
+      <li>If we try to query an array using a single element, the result will contain only documents where this array field contains this specific element. <code class="highlighter-rouge">db.listingsAndReviews.find({"amenities" : ["shampoo"] } )</code> Here we try to find documents where amenities have only shampoo as an element.</li>
+      <li>
+<code class="highlighter-rouge">{ &lt;array field&gt; :  { **$elemMatch** : { &lt;field&gt; : &lt;value&gt;} } }</code> : match al documents that contain an array field with at least one element that matches the specified criteria.
+        <ul>
+          <li>
+<code class="highlighter-rouge">db.grades.find( { "class_id": 431 }, { "scores": { **$elemMatch** : { "score": { "$gt": 85 } } } } )</code>
+  Find me the documents with class id 431 &amp; have scores array containing one element of “score” that has a value &gt; 85.</li>
+          <li>
+<code class="highlighter-rouge">db.companies.find({ "relationships": { "**$elemMatch**": { "is_past": true, "person.first_name": "Mark" } } }, { "name": 1 })</code> Find documents where the “relationships” array contains “is_past” field in a sub-document of value “true” AND “first_name” field in the “person” document (which is a sub-document) of value “Mark”.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Projection:</strong>
+To choose which fields in a document are returned : “0” for not displaying the field, “1” for displaying it. Dont combine 0s &amp; 1s in a projection. The only combination allowed is to hide “_id” while displaying other fields, because “_id” will be displayed by default.
+<code class="highlighter-rouge">db.hwuPeople.find({},{_id:0,first_name : 1, last_name : 1})</code></p>
+  </li>
+  <li>
+    <p><strong>Querying Sub-documents:
+Dot-notation</strong> is used to query nested elements in an array of sub-documents.
+<code class="highlighter-rouge">db.&lt;collection&gt;.find( { "field1.otherField.alsoAfield" : &lt;value&gt;} )</code>
+<code class="highlighter-rouge">db.trips.findOne({ "start station location.type": "Point" })</code></p>
+  </li>
+  <li>
+<strong>Aggregation:</strong>
+As the order in the array matters, the aggregation framework is included in square brackets [just similar to arrays] to emphasize the importance of actions order, as the pipeline goes through the listed actions in order.
+    <ul>
+      <li>Using the aggregation framework find all documents that have Wifi as one of the amenities. Only include price and address in the resulting cursor. (This can achieved more concisely with <code class="highlighter-rouge">find()</code> )
+  <code class="highlighter-rouge">db.listingsAndReviews.**aggregate**([ { "**$match**": { "amenities": "Wifi" } }, { "**$project**": { "price": 1, "address": 1, "_id": 0 }}])</code>
+</li>
+      <li>Project only the address field value for each document, then group all documents into one document per address.country value. <code class="highlighter-rouge">$project</code> is executed first, then <code class="highlighter-rouge">$group</code>
+  <code class="highlighter-rouge">db.listingsAndReviews.**aggregate**([ { "**$project**": { "address": 1, "_id": 0 }}, { "**$group**": { "**_id**": "$address.country" }}])</code>
+        <ul>
+          <li>
+<code class="highlighter-rouge">"_id"</code> : the grouping by field</li>
+        </ul>
+      </li>
+      <li>Project only the address field value for each document, then group all documents into one document per address.country value, and count one for each document in each group.
+  <code class="highlighter-rouge">db.listingsAndReviews.**aggregate**([ { "**$project**": { "address": 1, "_id": 0 }}, { "**$group**": { "**_id**": "$address.country", "count": { "$sum": 1 } } } ])</code>
+        <ul>
+          <li>
+<code class="highlighter-rouge">"_id"</code> : the grouping by field</li>
+          <li>
+<code class="highlighter-rouge">"count"</code> : a count field to be presented in the result. It applies <code class="highlighter-rouge">$sum</code> to each document of the value 1 (counting the number of documents)</li>
+        </ul>
+      </li>
+      <li>
+<code class="highlighter-rouge">**$size**</code> : Counts and returns the total number of items in an array.
+  <code class="highlighter-rouge">{ $size: &lt;expression&gt; }</code> The argument for <code class="highlighter-rouge">$size</code> <strong>must resolve to an array (must be an array)</strong>. If the argument for <code class="highlighter-rouge">$size</code> is missing or does not resolve to an array, $size errors.</li>
+      <li>FULL EXAMPLE : 
+  <code class="highlighter-rouge">db.hwuPeople.**aggregate**([
+                      {**$group**: { _id: "$title", uniqueLastnames: {$addToSet: "$last_name"} } },
+                      {**$project**: { _id: 1, groups: {$size: "$uniqueLastnames"} } },
+                      {**$sort**: { groups: -1 } },
+                      {**$limit**: 1}
+                      ])</code>
+</li>
+    </ul>
+  </li>
+</ul>
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="MoRaouf/MoSpace"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/MoSpace/post/2021/09/08/MongoDB-Tutorial.html" hidden></a>
+</article>
+</p>
+          </section>
+
+          <!-- Footer -->
+            <footer>
+              <ul class="actions">
+                <li><a href="https://moraouf.github.io/MoSpace/" class="button">Home</a></li>
+                <li><a href="https://moraouf.github.io/MoSpace/blog/" class="button">Blog</a></li>
+                <li><a href="https://moraouf.github.io/MoSpace/projects/" class="button">Projects</a></li>
+              </ul>
+            </footer>
+          </div>
+
+        <!-- Footer -->
+        <!-- Copyright -->
+<div id="copyright">
+  <ul>
+    <li>&copy; MoRaouf |
+      <a href="https://github.com/MoRaouf" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a> |
+      <a href="https://twitter.com/_MRaouf" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a> |
+      <a href="https://orcid.org/" class="ai ai-orcid" rel="nofollow"><span class="label">ORCID</span></a> |
+      <a href="https://scholar.google.es/citations?user=" class="ai ai-google-scholar" rel="nofollow"><span class="label">Google Scholar</span></a> |
+      
+      <a href="/MoSpace/atom.xml" title="Atom Feed" class="icon fa-rss" rel="nofollow">
+        <span class="label">Subscribe</span>
+      </a>
+      
+    </li>
+    <li>Powered by <a href="https://fastpages.fast.ai/">fastpages</a></li>
+    <li>Design by <a href="https://html5up.net" rel="nofollow">HTML5 UP</a> &
+      <a href="https://github.com/mmistakes/jekyll-theme-basically-basic">Basically Basic</a></li>
+    <li>Jekyll Integration by <a href="https://jekyllup.com/">JekyllUp</a> </li>
+  </ul>
+</div>
+
+
+      </div>
+
+    <!-- Scripts -->
+    <!-- DYN -->
+<script src="https://moraouf.github.io/MoSpace/assets/js/jquery.min.js"></script>
+<script src="https://moraouf.github.io/MoSpace/assets/js/jquery.scrollex.min.js"></script>
+<script src="https://moraouf.github.io/MoSpace/assets/js/jquery.scrolly.min.js"></script>
+<script src="https://moraouf.github.io/MoSpace/assets/js/skel.min.js"></script>
+<script src="https://moraouf.github.io/MoSpace/assets/js/util.js"></script>
+<script src="https://moraouf.github.io/MoSpace/assets/js/main.js"></script>
+
+
+  </body>
+</html>
