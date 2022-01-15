@@ -5,7 +5,7 @@ description: "Document-oriented NoSQL Database Turorial & Code Snippets"
 categories: [post]
 tags: [MongoDB, NoSQL]
 title: "Introduction to MongoDB"
-image: "images/posts/MongoDB.png"
+image: "images/MongoDB.png"
 comments: true
 featured: false
 
