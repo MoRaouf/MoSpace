@@ -66,11 +66,13 @@ layout: page
   </header>
   <br> 
   <br>
-  <div class="post-content e-content" itemprop="articleBody">
-    <strong><u>Table of content:</u></strong> <br />
-    {{ content | toc  }}
-  </div>
-  
+  {%- if page.toc -%}
+    <div class="post-content e-content" itemprop="articleBody">
+      <strong><u>Table of content:</u></strong> <br />
+      {{ content | toc  }}
+    </div>
+  {%- endif -%}
+
   {%- if page.comments -%}
     {%- include utterances.html -%}
   {%- endif -%}
