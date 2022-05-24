@@ -122,4 +122,4 @@ defaults:
     values:
       read_time: true
       twitter_large_image: false
-      use_math: false
+      use_math: true
