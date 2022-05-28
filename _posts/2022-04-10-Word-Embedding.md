@@ -5,7 +5,7 @@ description: "Word2vec math & code explanation with TensorFlow"
 categories: [post]
 tags: [Word Embedding, Word2vec, TensorFlow]
 title: "Understanding Word Embeddings"
-image: "images/posts/WordEmbedding/WEPost.png"
+image: "images/WordEmbedding/WEPost.png"
 comments: true
 featured: true
 ---
