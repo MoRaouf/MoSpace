@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="twitter:card" content="summary" /><title>Understanding Word Embeddings | MoSpace</title>
+<meta name="description" content="Word2vec math & code explanation with TensorFlow">
+
+<!-- SEO and meta information for twitter/whatsupp cards --><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Understanding Word Embeddings | MoSpace</title>
+<meta name="generator" content="Jekyll v4.0.1" />
+<meta property="og:title" content="Understanding Word Embeddings" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Word2vec math &amp; code explanation with TensorFlow" />
+<meta property="og:description" content="Word2vec math &amp; code explanation with TensorFlow" />
+<link rel="canonical" href="https://moraouf.github.io/MoSpace/post/2022/04/11/Word-Embedding.html" />
+<meta property="og:url" content="https://moraouf.github.io/MoSpace/post/2022/04/11/Word-Embedding.html" />
+<meta property="og:site_name" content="MoSpace" />
+<meta property="og:image" content="https://moraouf.github.io/MoSpace/images/WordEmbedding/WEPost.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-04-11T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Word2vec math &amp; code explanation with TensorFlow","@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://moraouf.github.io/MoSpace/images/logo.png"}},"url":"https://moraouf.github.io/MoSpace/post/2022/04/11/Word-Embedding.html","headline":"Understanding Word Embeddings","dateModified":"2022-04-11T00:00:00-05:00","datePublished":"2022-04-11T00:00:00-05:00","image":"https://moraouf.github.io/MoSpace/images/WordEmbedding/WEPost.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://moraouf.github.io/MoSpace/post/2022/04/11/Word-Embedding.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<!-- Feed --><link type="application/atom+xml" rel="alternate" href="https://moraouf.github.io/MoSpace/atom.xml" title="MoSpace" /><!-- CSS --><link rel="shortcut icon" type="image/png" href="/MoSpace/images/logo.png">
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://moraouf.github.io/MoSpace/assets/css/main.css" />
+<noscript><link rel="stylesheet" href="https://moraouf.github.io/MoSpace/assets/css/noscript.css" /></noscript>
+<link rel="stylesheet" href="https://moraouf.github.io/MoSpace/assets/stylesheets/main.css" />
+<link rel="stylesheet" href="https://moraouf.github.io/MoSpace/assets/css/academicons.min.css"/>
+
+<!-- Analytics --><!-- Math -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+  </head>
+  <body class="is-loading">
+
+    <!-- Wrapper -->
+      <div id="wrapper" class="fade-in">
+
+        <!-- Header -->
+        <header id="header">
+          <a href="https://moraouf.github.io/MoSpace/" class="logo">MoSpace</a>
+        </header>
+
+        <!-- Nav -->
+          <nav id="nav">
+
+            <ul class="links">
+  <li class=""><a href="https://moraouf.github.io/MoSpace/">Home</a></li>
+  <li class=""><a href="https://moraouf.github.io/MoSpace/blog/">Blog</a></li>
+  <li class=""><a href="https://moraouf.github.io/MoSpace/projects/">Projects</a></li>
+  <!-- <li class=""><a href="https://moraouf.github.io/MoSpace/categories/">Categories</a></li> -->
+  <li class=""><a href="https://moraouf.github.io/MoSpace/tags/">Tags</a></li>
+  <li class=""><a href="https://moraouf.github.io/MoSpace/about/">About me</a></li>
+  <li class=""><a href="https://drive.google.com/file/d/19H51_xoyo2tGBWKdXFZNAEAPuulesaV9/view?usp=sharing">My CV</a></li>
+</ul>
+
+<ul class="icons">
+  <li class=""><a href="https://moraouf.github.io/MoSpace/search" class="icon fa-search"><span class="label">Search</span></a></li>
+  <li><a href="https://github.com/MoRaouf" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a></li>
+  <!-- <li><a href="https://twitter.com/_MRaouf" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a></li>-->
+  <li><a href="https://linkedin.com/in/" class="icon fa-linkedin" rel="nofollow"><span class="label">LinkedIn</span></a></li>
+</ul>
+
+
+          </nav>
+
+        <!-- Main -->
+        <div id="main">
+
+          <!-- Post -->
+          <section class="post">
+            
+            <p><article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Understanding Word Embeddings</h1><p class="page-description">Word2vec math & code explanation with TensorFlow</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-04-11T00:00:00-05:00" itemprop="datePublished">
+        Apr 11, 2022
+      </time>• 
+
+
+
+<span class="read-time" title="Estimated read time">
+
+  8 min read
+
+</span>
+
+    </p>
+
+    
+      <p class="category-tags"><i class="fa fa-folder category-tags-icon"></i></i>
+      
+        <a class="category-tags-link" href="/MoSpace/categories/#post">post</a>
+        
+      
+      </p>
+    
+
+    
+      <p class="category-tags"><i class="fa fa-tags category-tags-icon"></i></i>
+      
+        <a class="category-tags-link" href="/MoSpace/tags/#Word Embedding">Word Embedding</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/MoSpace/tags/#Word2vec">Word2vec</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/MoSpace/tags/#TensorFlow">TensorFlow</a>
+        
+      
+      </p>
+    
+
+    </header>
+  <br> 
+  <br>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#word-embedding">Word Embedding</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#word2vec">Word2vec</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#skip-gram-and-negative-sampling">Skip-gram and negative sampling</a></li>
+<li class="toc-entry toc-h3"><a href="#objective-function-for-the-skip-gram">Objective Function for the Skip-gram</a></li>
+<li class="toc-entry toc-h3"><a href="#context-word-probability-pw_c-vert-w_t">Context Word Probability $P(w_c \vert w_t)$</a></li>
+<li class="toc-entry toc-h3"><a href="#gradient-descent">Gradient Descent</a></li>
+<li class="toc-entry toc-h3"><a href="#negative-sampling">Negative Sampling</a></li>
+<li class="toc-entry toc-h3"><a href="#skip-gram-with-negative-sampling">Skip-gram with Negative Sampling</a></li>
+<li class="toc-entry toc-h3"><a href="#word2vec-training">Word2vec Training</a></li>
+<li class="toc-entry toc-h3"><a href="#hyperparameters">Hyperparameters</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#tensorflow">TensorFlow</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#embedding-through-tensorflow">Embedding through TensorFlow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h1 id="word-embedding">
+<a class="anchor" href="#word-embedding" aria-hidden="true"><span class="octicon octicon-link"></span></a><u>Word Embedding</u>
+</h1>
+<h2 id="word2vec">
+<a class="anchor" href="#word2vec" aria-hidden="true"><span class="octicon octicon-link"></span></a><u>Word2vec</u>
+</h2>
+
+<ul>
+  <li>Word2vec is not a singular algorithm, rather, it is a family of model architectures and optimizations that can be used to learn word embeddings from large datasets.</li>
+  <li>There are two main models that help to learn word embeddings:
+    <ul>
+      <li>
+<strong>Continuous bag-of-words model</strong>: predicts the middle word based on surrounding context words. The context consists of a few words before and after the current (middle) word. <strong>This architecture is called a bag-of-words model as the order of words in the context is not important</strong>.</li>
+      <li>
+<strong>Skip-gram model</strong>: predicts words within a certain range before and after the current word in the same sentence.<br><br>
+</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="skip-gram-and-negative-sampling">
+<a class="anchor" href="#skip-gram-and-negative-sampling" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Skip-gram and negative sampling</strong>
+</h3>
+
+<ul>
+  <li>While a bag-of-words model predicts a word given the neighboring context, a skip-gram model predicts the context (or neighbors) of a word, given the word itself. The model is trained on skip-grams, which are n-grams that allow tokens to be skipped (see the diagram below for an example). The context of a word can be represented through a set of skip-gram pairs of <code class="highlighter-rouge">(target_word, context_word)</code> where <code class="highlighter-rouge">context_word</code> appears in the neighboring context of <code class="highlighter-rouge">target_word</code>.</li>
+  <li>
+    <p>The context words for a <code class="highlighter-rouge">target word</code> is defined by a <strong>window size</strong>. The window size determines the span of words on either side of a <code class="highlighter-rouge">target_word</code> that can be considered a <code class="highlighter-rouge">context word</code>.</p>
+
+    <p><img src="/MoSpace/images/WordEmbedding/WE0.png" alt=""></p>
+  </li>
+  <li>
+    <p>At the start of the training phase, we create two matrices – an <code class="highlighter-rouge">Embedding</code> matrix and a <code class="highlighter-rouge">Context</code> matrix. These two matrices have an embedding for each word in our vocabulary (So <code class="highlighter-rouge">vocab_size</code> is one of their dimensions). The second dimension is how long we want each embedding to be (<code class="highlighter-rouge">embedding_size</code>  , 300 is a common value). These two matrices are for the same words, &amp; are initialized randomly. After training, we discard the <code class="highlighter-rouge">Context</code> matrix &amp; choose the <code class="highlighter-rouge">Embedding</code> matrix as our word embedding representation.</p>
+
+    <p><img src="/MoSpace/images/WordEmbedding/WE1.png" alt=""><br><br></p>
+  </li>
+</ul>
+
+<h3 id="objective-function-for-the-skip-gram">
+<a class="anchor" href="#objective-function-for-the-skip-gram" aria-hidden="true"><span class="octicon octicon-link"></span></a>Objective Function for the Skip-gram</h3>
+
+<ul>
+  <li>The training objective of the skip-gram model is to maximize the probability of predicting context words given the target word. For a sequence of words $w1, w2, … wT$, the objective can be written as the average log probability, where <code class="highlighter-rouge">c</code> is the size of the training context.:
+    <ul>
+      <li>$\frac{1}{T}\sum_{t=1}^{T}\sum_{-c\le j \le c,j\ne0} log \space p(w_{t+j}\vert w_t)$</li>
+      <li>In this objective function, we are calculating for each target word $w_t$ the summation of probabilities of each context word $w_{t+j}$ in the context span from $-c\le j \le c$ , &amp; $j\ne0$ so we don’t calculate probability of predicting the same target word as a context word given it as a target. Then we sum over all the words sequence &amp; divide by the total number of words. In this way we want to maximize the output probability as this is like we are calculating a probability for a single word &amp; we want it as maximum as possible. If we manage to get for each target word the maximum probability, lets say more than 0.9, then when we sum over all words probabilities &amp; divide by their number we will get the maximum probability for the objective function &amp; in this way we are minimizing the error &amp; getting better word embedding representations.<br><br>
+</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="context-word-probability-pw_c-vert-w_t">
+<a class="anchor" href="#context-word-probability-pw_c-vert-w_t" aria-hidden="true"><span class="octicon octicon-link"></span></a>Context Word Probability $P(w_c \vert w_t)$</h3>
+
+<ul>
+  <li>The conditional probability of generating the context word $w_c$ for the given central target word $w_t$ can be obtained by performing a softmax operation on the vectors inner product:
+    <ul>
+      <li>$P(w_c \vert w_t) = \frac{exp({u_c^⊤} * v_t)}{\sum_{i \in V} exp({u_i^T} * v_t)}$ , where $u_c$ is the vector of the context word, $v_c$ is the vector of the target word &amp; $V$ is the length of the vocabulary.</li>
+      <li>Computing the denominator of this formulation involves performing a full softmax over the entire vocabulary words, which are often large ($10^5$ to $10^7$) terms.<br><br>
+</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="gradient-descent">
+<a class="anchor" href="#gradient-descent" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gradient Descent</h3>
+
+<ul>
+  <li>The key of gradient computation is to compute the gradient of the logarithmic conditional probability for the central target word vector and the context word vector. By definition, if we take the $log$  for both sides, we first have:
+    <ul>
+      <li>$log \space P (w_c \vert w_t) = (u_c^⊤ * v_t) − log(\sum_{i \in V} exp({u_i^T} * v_t))$</li>
+      <li>Through differentiation, we can get the gradient of $v_t$ from the formula above by differentiating with respect to $v_t$:
+        <ul>
+          <li>$\frac{\partial \space log \space P (w_c \vert w_t)}{\partial v_t} = u_c-\frac{\sum_{j \in V} exp({u_j^T} * v_t) * u_j}{\sum_{i \in V} exp({u_i^T} * v_t)}$
+  , we consider only the context words ($j$s) of the current target word in the numerator.</li>
+          <li>$\frac{\partial \space log \space P (w_c \vert w_t)}{\partial v_t} = u_c-\sum_{j \in V}(\frac{ exp({u_j^T} * v_t)}{\sum_{i \in V} exp({u_i^T} * v_t)}) * u_j$
+  , we reformat the differentiation by taking out the summation over the context words &amp; their vectors.</li>
+          <li>$\frac{\partial \space log \space P (w_c \vert w_t)}{\partial v_t} = u_c-\sum_{j \in V}P(w_j \vert w_t)*u_j$<br><br>
+</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="negative-sampling">
+<a class="anchor" href="#negative-sampling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Negative Sampling</h3>
+
+<ul>
+  <li>
+    <p>To generate high-quality embeddings using a high-performance model, we can switch the model’s task from predicting a neighboring word:</p>
+
+    <p><img src="/MoSpace/images/WordEmbedding/WE2.png" alt=""></p>
+  </li>
+  <li>
+    <p>And switch it to a model that takes the input and output word, and outputs a score indicating if they’re neighbors or not (0 for “not neighbors”, 1 for “neighbors”).</p>
+
+    <p><img src="/MoSpace/images/WordEmbedding/WE3.png" alt=""></p>
+  </li>
+  <li>
+    <p>So we switch from the left dataset structure to the right one below:</p>
+
+    <p><img src="/MoSpace/images/WordEmbedding/WE4.png" alt=""></p>
+  </li>
+  <li>When we apply skipgram on a sentence, we generate pairs of <code class="highlighter-rouge">(target_word, context_word)</code> &amp; these pairs are all positive with target equal to 1 (i.e., we know all the true context words for the target word). If we train a model on these pairs, it will get an accuracy of 100% as we have only one class of output.</li>
+  <li>
+    <p>To produce additional skip-gram pairs that would serve as negative samples for training, you need to sample random words from the vocabulary. <strong>Negative samples</strong> are samples of words that are not neighbors.  Our model needs to return 0 for those samples. So we get the following dataset instead:</p>
+
+    <p><img src="/MoSpace/images/WordEmbedding/WE5.png" alt=""></p>
+  </li>
+</ul>
+
+<h3 id="skip-gram-with-negative-sampling">
+<a class="anchor" href="#skip-gram-with-negative-sampling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Skip-gram with Negative Sampling</h3>
+
+<ul>
+  <li>
+    <p>In a nutshell, the two main ideas of this model can be visualized as follows:</p>
+
+    <p><img src="/MoSpace/images/WordEmbedding/WE6.png" alt=""><br><br></p>
+  </li>
+</ul>
+
+<h3 id="word2vec-training">
+<a class="anchor" href="#word2vec-training" aria-hidden="true"><span class="octicon octicon-link"></span></a>Word2vec Training</h3>
+
+<ul>
+  <li>Before the training process starts, we pre-process the text we’re training the model against. In this step, we determine the size of our vocabulary (we’ll call this <code class="highlighter-rouge">vocab_size</code>, think of it as, say, 10,000) and which words belong to it.</li>
+  <li>
+    <p>Then we have our <code class="highlighter-rouge">Embedding</code> matrix and <code class="highlighter-rouge">Context</code> matrix. We initialize these matrices with random values. Then we start the training process. In each training step, we take one positive example and its associated negative examples.</p>
+
+    <p><img src="/MoSpace/images/WordEmbedding/WE7.png" alt=""></p>
+  </li>
+  <li>
+    <p>For the input word, we look in the <code class="highlighter-rouge">Embedding</code> matrix, &amp; for the context words, we look in the <code class="highlighter-rouge">Context</code> matrix.</p>
+
+    <p><img src="/MoSpace/images/WordEmbedding/WE8.png" alt=""></p>
+  </li>
+  <li>Then, we take the dot product of the input embedding vector with each of the context embeddings vectors (this is the numerator part in the (Context Word Probability section). Then we apply the softmax for each sample ( for positives &amp; negatives). Then we go through backpropagation to update our matrices.<br><br>
+</li>
+</ul>
+
+<h3 id="hyperparameters">
+<a class="anchor" href="#hyperparameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hyperparameters</h3>
+
+<ul>
+  <li>Two key hyperparameters in the word2vec training process are the <strong>window size</strong> and the <strong>number of negative samples</strong>.</li>
+  <li>The <code class="highlighter-rouge">Gensim</code> library default window size is 5 (two words before and two words after the input word, in addition to the input word itself).</li>
+  <li>The original paper prescribes 5-20 as being a good number of negative samples. It also states that 2-5 seems to be enough when you have a large enough dataset. The <code class="highlighter-rouge">Gensim</code> library default is 5 negative samples.<br><br>
+</li>
+</ul>
+
+<h2 id="tensorflow">
+<a class="anchor" href="#tensorflow" aria-hidden="true"><span class="octicon octicon-link"></span></a><u>TensorFlow</u>
+</h2>
+
+<ul>
+  <li>You can use the <code class="highlighter-rouge">tf.keras.preprocessing.sequence.skipgrams</code> to generate skip-gram pairs from the <code class="highlighter-rouge">sequence</code> with a given <code class="highlighter-rouge">window_size</code> from tokens in the range <code class="highlighter-rouge">[0, vocab_size)</code>
+    <div class="language-python highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">preprocessing</span><span class="p">.</span><span class="n">sequence</span><span class="p">.</span><span class="n">skipgrams</span><span class="p">(</span>
+  <span class="err"> </span> <span class="err"> </span> <span class="n">sequence</span><span class="p">,</span>
+  <span class="err"> </span> <span class="err"> </span> <span class="n">vocabulary_size</span><span class="p">,</span>
+  <span class="err"> </span> <span class="err"> </span> <span class="n">window_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+  <span class="err"> </span> <span class="err"> </span> <span class="n">negative_samples</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+  <span class="err"> </span> <span class="err"> </span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+  <span class="err"> </span> <span class="err"> </span> <span class="n">categorical</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+  <span class="err"> </span> <span class="err"> </span> <span class="n">sampling_table</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+  <span class="err"> </span> <span class="err"> </span> <span class="n">seed</span><span class="o">=</span><span class="bp">None</span>
+<span class="p">)</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>
+<strong>Returns:</strong> couples, labels; where <code class="highlighter-rouge">couples</code> are <strong>int pairs</strong> and <code class="highlighter-rouge">labels</code> are either 0 or 1.</li>
+    </ul>
+  </li>
+  <li>
+    <p>A <a href="https://www.tensorflow.org/tutorials/text/word2vec#summary">comprehensive chart</a> of creating skipgram pairs using TensorFlow is given as:</p>
+
+    <p><img src="/MoSpace/images/WordEmbedding/WE9.png" alt=""><br><br></p>
+  </li>
+</ul>
+
+<h3 id="embedding-through-tensorflow">
+<a class="anchor" href="#embedding-through-tensorflow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Embedding through TensorFlow</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">vocab_size</span> <span class="o">=</span> <span class="mi">10000</span> 
+    <span class="n">max_length</span> <span class="o">=</span> <span class="mi">120</span>
+    <span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">16</span>
+    <span class="c1">#Build the model
+</span>    <span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">Sequential</span><span class="p">([</span>
+        <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="o">**</span><span class="p">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">output_dim</span><span class="o">=</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="n">input_length</span><span class="o">=</span><span class="n">max_length</span><span class="p">)</span><span class="o">**</span><span class="p">,</span>
+        <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Flatten</span><span class="p">(),</span>
+        <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">),</span>
+        <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'sigmoid'</span><span class="p">)</span>
+    <span class="p">])</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+<code class="highlighter-rouge">input_dim</code>: Size of the vocabulary in our corpus.</li>
+  <li>
+<code class="highlighter-rouge">output_dim</code>: Dimension of the dense embedding we want to produce for each word.</li>
+  <li>
+<code class="highlighter-rouge">input_length</code>:Length of input sequences for each sentence, when it is constant. This argument is required if you are going to connect <code class="highlighter-rouge">Flatten</code> then <code class="highlighter-rouge">Dense</code> layers upstream (without it, the shape of the dense outputs cannot be computed).</li>
+  <li>
+<strong>Input shape:</strong> 2D tensor with shape: <code class="highlighter-rouge">(batch_size, input_length)</code>  —→»&gt; <strong>[#samples, #words_in_sample_represented_as_<code class="highlighter-rouge">max_length</code>]</strong>
+    <ul>
+      <li>
+<code class="highlighter-rouge">batch_size</code> is the number of samples we input to the layer</li>
+      <li>Our input to the embedding layer is a list of samples of length = <code class="highlighter-rouge">vocab_size</code>  where each sample is a list of words &amp; we limit each sentence to a length of words = <code class="highlighter-rouge">max_length</code>
+</li>
+      <li>As each sample has words of <code class="highlighter-rouge">max_length</code> , then we want each word to be represented as a vector of length = <code class="highlighter-rouge">embedding_dim</code> instead of being represented as a single number.</li>
+      <li>It’s not necessarily to have in each sentence the same words, so there are no fixed columns header.</li>
+    </ul>
+  </li>
+  <li>
+<strong>Output shape:</strong> 3D tensor with shape: <code class="highlighter-rouge">(batch_size, input_length, output_dim)</code>
+    <ul>
+      <li>After the transformation of each word from a single number (from the <code class="highlighter-rouge">word_index</code>) to a vector of embedding, we can visualize our input matrix to have a 3rd dimension of depth protrudes from each cell that represents a single word embedding vector.</li>
+    </ul>
+
+    <blockquote>
+      <p><strong><em>In the below picture, we can think of our input to be [2,5]. 2 samples where each sample has <code class="highlighter-rouge">max_length</code> of 5 words. After transformation, each word will be represented as an embedding vector of length 3.</em></strong></p>
+
+    </blockquote>
+
+    <p><img src="/MoSpace/images/WordEmbedding/WE10.png" alt=""></p>
+  </li>
+</ul>
+
+<p><u>**Useful links**</u>:
+<br><br>
+<a href="https://jalammar.github.io/illustrated-word2vec/">The Illustrated Word2vec</a></p>
+
+<p><a href="https://www.tensorflow.org/tutorials/text/word2vec">Word2vec</a></p>
+
+<p><a href="https://stopwolf.github.io/blog/nlp/paper/2020/08/17/word2vec.html">Understanding Word2Vec: Code and Math</a></p>
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="MoRaouf/MoSpace"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/MoSpace/post/2022/04/11/Word-Embedding.html" hidden></a>
+</article>
+</p>
+          </section>
+
+          <!-- Footer -->
+            <footer>
+              <ul class="actions">
+                <li><a href="https://moraouf.github.io/MoSpace/" class="button">Home</a></li>
+                <li><a href="https://moraouf.github.io/MoSpace/blog/" class="button">Blog</a></li>
+                <li><a href="https://moraouf.github.io/MoSpace/projects/" class="button">Projects</a></li>
+              </ul>
+            </footer>
+          </div>
+
+        <!-- Footer -->
+        <!-- Copyright -->
+<div id="copyright">
+  <ul>
+    <li>&copy; MoRaouf |
+      <a href="https://github.com/MoRaouf" class="icon fa-github" rel="nofollow"><span class="label">GitHub</span></a> |
+      <a href="https://twitter.com/_MRaouf" class="icon fa-twitter" rel="nofollow"><span class="label">Twitter</span></a> |
+      <a href="https://orcid.org/" class="ai ai-orcid" rel="nofollow"><span class="label">ORCID</span></a> |
+      <a href="https://scholar.google.es/citations?user=" class="ai ai-google-scholar" rel="nofollow"><span class="label">Google Scholar</span></a> |
+      
+      <a href="/MoSpace/atom.xml" title="Atom Feed" class="icon fa-rss" rel="nofollow">
+        <span class="label">Subscribe</span>
+      </a>
+      
+    </li>
+    <li>Powered by <a href="https://fastpages.fast.ai/">fastpages</a></li>
+    <li>Design by <a href="https://html5up.net" rel="nofollow">HTML5 UP</a> &
+      <a href="https://github.com/mmistakes/jekyll-theme-basically-basic">Basically Basic</a></li>
+    <li>Jekyll Integration by <a href="https://jekyllup.com/">JekyllUp</a> </li>
+  </ul>
+</div>
+
+
+      </div>
+
+    <!-- Scripts -->
+    <!-- DYN -->
+<script src="https://moraouf.github.io/MoSpace/assets/js/jquery.min.js"></script>
+<script src="https://moraouf.github.io/MoSpace/assets/js/jquery.scrollex.min.js"></script>
+<script src="https://moraouf.github.io/MoSpace/assets/js/jquery.scrolly.min.js"></script>
+<script src="https://moraouf.github.io/MoSpace/assets/js/skel.min.js"></script>
+<script src="https://moraouf.github.io/MoSpace/assets/js/util.js"></script>
+<script src="https://moraouf.github.io/MoSpace/assets/js/main.js"></script>
+
+
+  </body>
+</html>
